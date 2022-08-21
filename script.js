@@ -33,42 +33,54 @@ adding a new class to the div.
 changing the div’s background color using JavaScript.
 */
 
-const container = document.getElementById('grid-container');
+const defaultColor = 'black';
+
+const gridContainer = document.getElementById('grid-container');
+const btnBlack = document.querySelector('.btn-black');
+const btnRandom = document.querySelector('.btn-random');
+const btnGray = document.querySelector('.btn-gray');
+const btnEraser = document.querySelector('.btn-eraser');
+const btnColorPick = document.querySelector('.btn-colorpick');
 
 let myDivs;
-/* 
-for (let i = 0; i < 256; i++) {
-    myDivs = document.createElement('div');
 
-    myDivs.className = 'block';
-    container.append(myDivs);
-    myDivs.addEventListener('mouseleave', function (e) {
-        e.target.style.backgroundColor = 'purple';
-        console.log(e);
-    });
-}
- */
 function gridCreate(num) {
+    gridContainer.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
+    gridContainer.style.gridTemplateRows = `repeat(${num}, 1fr)`;
+
     for (let i = 0; i < num ** 2; i++) {
         myDivs = document.createElement('div');
         myDivs.className = 'block';
-        container.append(myDivs);
-        container.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
-        container.style.gridTemplateRows = `repeat(${num}, 1fr)`;
+        gridContainer.appendChild(myDivs);
     }
 }
 
-gridCreate(32);
+gridCreate(64);
 
 const blocks = document.getElementsByClassName('block');
 console.log(blocks);
 
 const arrBlocks = [].slice.call(blocks);
 console.log(arrBlocks);
-
+/* 
 arrBlocks.forEach((arrBlock) => {
-    arrBlock.addEventListener('mouseleave', function (e) {
-        arrBlock.style.backgroundColor = 'yellow';
-        console.log(e.target);
+    arrBlock.addEventListener('mouseenter', function () {
+        arrBlock.style.backgroundColor = defaultColor;
     });
 });
+ */
+
+arrBlocks.forEach((arrBlock) => {
+    arrBlock.addEventListener('mouseenter', colorChanger);
+});
+
+function colorChanger() {
+    this.style.backgroundColor = randomRGB();
+}
+
+function randomRGB() {
+    let red = Math.floor(Math.random() * 255);
+    let green = Math.floor(Math.random() * 255);
+    let blue = Math.floor(Math.random() * 255);
+    return `rgb(${red}, ${green}, ${blue})`;
+}

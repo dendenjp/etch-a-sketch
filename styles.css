@@ -1,12 +1,33 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* font-size: 10px; */
+
+    /* 10px / 16px = 0.625 = 62.5% */
+    /* Percentage of user's browser font-size setting */
+    font-size: 62.5%;
+
+    /* Does NOT work on Safari */
+    /* scroll-behavior: smooth; */
+}
+
 .grid-container {
     display: grid;
-    /* grid-template-rows: repeat(16, 1fr);
-    grid-template-columns: repeat(16, 1fr); */
+    gap: 1px;
     height: 500px;
     width: 500px;
+    border-radius: 2px;
+    border: solid 1px #aaa;
+    background-color: #aaa;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    overflow: hidden;
 }
 
 .block {
     display: inline-block;
-    border: solid 0.01px red;
+    background-color: white;
 }
