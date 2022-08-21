@@ -36,7 +36,7 @@ changing the div’s background color using JavaScript.
 const container = document.getElementById('grid-container');
 
 let myDivs;
-
+/* 
 for (let i = 0; i < 256; i++) {
     myDivs = document.createElement('div');
 
@@ -47,9 +47,28 @@ for (let i = 0; i < 256; i++) {
         console.log(e);
     });
 }
-/* 
-myDivs.addEventListener('mouseleave', function (e) {
-    e.target.style.backgroundColor = 'purple';
-    console.log(e);
-});
  */
+function gridCreate(num) {
+    for (let i = 0; i < num ** 2; i++) {
+        myDivs = document.createElement('div');
+        myDivs.className = 'block';
+        container.append(myDivs);
+        container.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
+        container.style.gridTemplateRows = `repeat(${num}, 1fr)`;
+    }
+}
+
+gridCreate(32);
+
+const blocks = document.getElementsByClassName('block');
+console.log(blocks);
+
+const arrBlocks = [].slice.call(blocks);
+console.log(arrBlocks);
+
+arrBlocks.forEach((arrBlock) => {
+    arrBlock.addEventListener('mouseleave', function (e) {
+        arrBlock.style.backgroundColor = 'yellow';
+        console.log(e.target);
+    });
+});
