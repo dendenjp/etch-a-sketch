@@ -14,7 +14,9 @@
         </header>
 
         <main class="content">
-            <button type="button" id="btn" class="btn-black">Black</button>
+            <button type="button" id="btn" class="btn-black --active">
+                Black
+            </button>
             <button type="button" id="btn" class="btn-random">Random</button>
             <button type="button" id="btn" class="btn-gray">Gray</button>
             <button type="button" id="btn" class="btn-eraser">Eraser</button>
@@ -24,6 +26,13 @@
             <div class="grid-container-wrapper">
                 <div id="grid-container" class="grid-container"></div>
             </div>
+            <input
+                type="range"
+                min="4"
+                max="64"
+                value="16"
+                class="grid-slider"
+            />
         </main>
     </body>
 </html>

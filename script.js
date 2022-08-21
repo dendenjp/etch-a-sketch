@@ -36,13 +36,28 @@ changing the div’s background color using JavaScript.
 const defaultColor = 'black';
 
 const gridContainer = document.getElementById('grid-container');
+let myDivs;
+
 const btnBlack = document.querySelector('.btn-black');
 const btnRandom = document.querySelector('.btn-random');
 const btnGray = document.querySelector('.btn-gray');
 const btnEraser = document.querySelector('.btn-eraser');
 const btnColorPick = document.querySelector('.btn-colorpick');
 
-let myDivs;
+const gridSlider = document.querySelector('.grid-slider');
+
+/* 
+function gridCreate(num) {
+    gridContainer.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
+    gridContainer.style.gridTemplateRows = `repeat(${num}, 1fr)`;
+
+    for (let i = 0; i < num ** 2; i++) {
+        myDivs = document.createElement('div');
+        myDivs.className = 'block';
+        gridContainer.appendChild(myDivs);
+    }
+}
+ */
 
 function gridCreate(num) {
     gridContainer.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
@@ -55,23 +70,18 @@ function gridCreate(num) {
     }
 }
 
-gridCreate(64);
+gridSlider.oninput = function (e) {
+    gridContainer.innerHTML = '';
+    gridCreate(e.target.value);
+};
 
+// gridCreate(16);
 const blocks = document.getElementsByClassName('block');
-console.log(blocks);
-
 const arrBlocks = [].slice.call(blocks);
-console.log(arrBlocks);
-/* 
-arrBlocks.forEach((arrBlock) => {
-    arrBlock.addEventListener('mouseenter', function () {
-        arrBlock.style.backgroundColor = defaultColor;
-    });
-});
- */
 
 arrBlocks.forEach((arrBlock) => {
     arrBlock.addEventListener('mouseenter', colorChanger);
+    console.log(arrBlock);
 });
 
 function colorChanger() {
