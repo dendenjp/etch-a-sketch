@@ -33,7 +33,13 @@ adding a new class to the div.
 changing the div’s background color using JavaScript.
 */
 
+const defaultMode = 'black';
+const defaultGrid = 16;
 const defaultColor = 'black';
+
+let currentMode = defaultMode;
+let currentGrid = defaultGrid;
+let currentColor = defaultColor;
 
 const gridContainer = document.getElementById('grid-container');
 let myDivs;
@@ -50,14 +56,21 @@ const gridSlider = document.querySelector('.grid-slider');
 function gridCreate(num) {
     gridContainer.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
     gridContainer.style.gridTemplateRows = `repeat(${num}, 1fr)`;
-
+    
     for (let i = 0; i < num ** 2; i++) {
         myDivs = document.createElement('div');
         myDivs.className = 'block';
         gridContainer.appendChild(myDivs);
     }
 }
- */
+*/
+
+gridCreate(defaultGrid);
+
+btnBlack.onclick = () => blackButton();
+btnRandom.onclick = () => rainbowButton();
+// btnBlack.addEventListener('click', blackButton);
+// btnRandom.addEventListener('click', rainbowButton);
 
 function gridCreate(num) {
     gridContainer.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
@@ -75,17 +88,32 @@ gridSlider.oninput = function (e) {
     gridCreate(e.target.value);
 };
 
-// gridCreate(16);
-const blocks = document.getElementsByClassName('block');
-const arrBlocks = [].slice.call(blocks);
-
-arrBlocks.forEach((arrBlock) => {
-    arrBlock.addEventListener('mouseenter', colorChanger);
-    console.log(arrBlock);
-});
-
-function colorChanger() {
+function rainbowColor() {
     this.style.backgroundColor = randomRGB();
+    console.log(this);
+}
+
+function blackColor() {
+    this.style.backgroundColor = 'black';
+    console.log(this);
+}
+
+function rainbowButton() {
+    const blocks = document.getElementsByClassName('block');
+    const arrBlocks = [].slice.call(blocks);
+
+    arrBlocks.forEach((arrBlock) => {
+        arrBlock.addEventListener('mouseenter', rainbowColor);
+    });
+}
+
+function blackButton() {
+    const blocks = document.getElementsByClassName('block');
+    const arrBlocks = [].slice.call(blocks);
+
+    arrBlocks.forEach((arrBlock) => {
+        arrBlock.addEventListener('mouseenter', blackColor);
+    });
 }
 
 function randomRGB() {
