@@ -1,37 +1,4 @@
 'use strict';
-/* 
-const para = document.createElement('p');
-
-const node = document.createTextNode('This is a new paragraph.');
-
-para.appendChild(node);
-
-const container = document.getElementById('container');
- */
-
-/*
-2. Create a webpage with a 16x16 grid of square divs.
-    Create the divs using JavaScript. Don’t try making them by hand with copy and pasting in your HTML file!
-    It’s best to put your grid squares inside another “container” div (which can go directly in your HTML).
-    There are several different ways to make the divs appear as a grid (versus just one on each line). Feel free to use any or play with each of them:
-        float/clear
-        inline-block
-        flexbox
-        CSS Grid
-    Be careful with borders and margins, as they can adjust the size of the squares!
-“OMG, why isn’t my grid being created???”
-Did you link your CSS stylesheet?
-Open your browser’s developer tools.
-Check if there are any errors in the JavaScript console.
-Check your “elements” pane to see if the elements have actually shown up but are somehow hidden.
-Go willy-nilly and add console.log statements in your JavaScript to see if it’s actually being loaded.
-
-3. Set up a “hover” effect so that the grid divs change color when your mouse passes over them, leaving a (pixelated) trail through your grid like a pen would.
-Hint: “Hovering” is what happens when your mouse enters a div and ends when your mouse leaves it. You can set up event listeners for either of those events as a starting point.
-There are multiple ways to change the color of the divs, including:
-adding a new class to the div.
-changing the div’s background color using JavaScript.
-*/
 
 const defaultMode = 'black';
 const defaultGrid = 16;
@@ -51,68 +18,68 @@ const btnEraser = document.querySelector('.btn-eraser');
 const btnColorPick = document.querySelector('.btn-colorpick');
 
 const gridSlider = document.querySelector('.grid-slider');
+const gridSliderText = document.querySelector('.grid-slider-text');
 
-/* 
+btnBlack.addEventListener('click', blackButton);
+btnRandom.addEventListener('click', rainbowButton);
+btnGray.addEventListener('click', grayButton);
+btnEraser.addEventListener('click', eraserButton);
+
 function gridCreate(num) {
     gridContainer.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
     gridContainer.style.gridTemplateRows = `repeat(${num}, 1fr)`;
-    
+
     for (let i = 0; i < num ** 2; i++) {
         myDivs = document.createElement('div');
         myDivs.className = 'block';
         gridContainer.appendChild(myDivs);
     }
 }
-*/
-
 gridCreate(defaultGrid);
-
-btnBlack.onclick = () => blackButton();
-btnRandom.onclick = () => rainbowButton();
-// btnBlack.addEventListener('click', blackButton);
-// btnRandom.addEventListener('click', rainbowButton);
-
-function gridCreate(num) {
-    gridContainer.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
-    gridContainer.style.gridTemplateRows = `repeat(${num}, 1fr)`;
-
-    for (let i = 0; i < num ** 2; i++) {
-        myDivs = document.createElement('div');
-        myDivs.className = 'block';
-        gridContainer.appendChild(myDivs);
-    }
-}
-
 gridSlider.oninput = function (e) {
+    let sliderText = e.target.value;
     gridContainer.innerHTML = '';
     gridCreate(e.target.value);
+    gridSliderText.textContent = `${sliderText} x ${sliderText}`;
 };
 
-function rainbowColor() {
-    this.style.backgroundColor = randomRGB();
-    console.log(this);
-}
-
-function blackColor() {
-    this.style.backgroundColor = 'black';
-    console.log(this);
-}
-
-function rainbowButton() {
+function rainbowButton(e) {
     const blocks = document.getElementsByClassName('block');
     const arrBlocks = [].slice.call(blocks);
-
+    console.log(e.target);
     arrBlocks.forEach((arrBlock) => {
-        arrBlock.addEventListener('mouseenter', rainbowColor);
+        arrBlock.addEventListener('mouseenter', function () {
+            arrBlock.style.backgroundColor = randomRGB();
+        });
     });
 }
 
 function blackButton() {
     const blocks = document.getElementsByClassName('block');
     const arrBlocks = [].slice.call(blocks);
-
     arrBlocks.forEach((arrBlock) => {
-        arrBlock.addEventListener('mouseenter', blackColor);
+        arrBlock.addEventListener('mouseenter', function () {
+            arrBlock.style.backgroundColor = 'black';
+        });
+    });
+}
+function grayButton() {
+    const blocks = document.getElementsByClassName('block');
+    const arrBlocks = [].slice.call(blocks);
+    arrBlocks.forEach((arrBlock) => {
+        arrBlock.addEventListener('mouseenter', function () {
+            arrBlock.style.backgroundColor = '#808080';
+        });
+    });
+}
+
+function eraserButton() {
+    const blocks = document.getElementsByClassName('block');
+    const arrBlocks = [].slice.call(blocks);
+    arrBlocks.forEach((arrBlock) => {
+        arrBlock.addEventListener('mouseenter', function () {
+            arrBlock.style.backgroundColor = 'white';
+        });
     });
 }
 

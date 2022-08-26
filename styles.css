@@ -9,10 +9,33 @@ html {
 
     /* 10px / 16px = 0.625 = 62.5% */
     /* Percentage of user's browser font-size setting */
+    font-family: 'DynaPuff', cursive;
     font-size: 62.5%;
 
     /* Does NOT work on Safari */
     /* scroll-behavior: smooth; */
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    gap: 2rem;
+}
+
+.page-header {
+    margin-top: 2rem;
+    font-size: 2rem;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }
 
 .grid-container {
@@ -25,6 +48,25 @@ html {
     background-color: #aaa;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     overflow: hidden;
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    font-size: 1.3rem;
+}
+
+#btn {
+    font-family: inherit;
+    background-color: yellow;
+    border: solid 1px black;
+    border-radius: 5px;
+    padding: 0.5rem;
+    cursor: pointer;
 }
 
 .block {
