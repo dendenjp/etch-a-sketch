@@ -4,10 +4,6 @@ const defaultMode = 'black';
 const defaultGrid = 16;
 const defaultColor = 'black';
 
-let currentMode = defaultMode;
-let currentGrid = defaultGrid;
-let currentColor = defaultColor;
-
 const gridContainer = document.getElementById('grid-container');
 let myDivs;
 
@@ -15,7 +11,7 @@ const btnBlack = document.querySelector('.btn-black');
 const btnRandom = document.querySelector('.btn-random');
 const btnGray = document.querySelector('.btn-gray');
 const btnEraser = document.querySelector('.btn-eraser');
-const btnColorPick = document.querySelector('.btn-colorpick');
+const colorInput = document.querySelector('.color-picker');
 
 const gridSlider = document.querySelector('.grid-slider');
 const gridSliderText = document.querySelector('.grid-slider-text');
@@ -24,6 +20,18 @@ btnBlack.addEventListener('click', blackButton);
 btnRandom.addEventListener('click', rainbowButton);
 btnGray.addEventListener('click', grayButton);
 btnEraser.addEventListener('click', eraserButton);
+
+let currentColor = defaultColor;
+colorInput.addEventListener('input', function (e) {
+    const blocks = document.getElementsByClassName('block');
+    const arrBlocks = [].slice.call(blocks);
+    currentColor = e.target.value;
+    arrBlocks.forEach((arrBlock) => {
+        arrBlock.addEventListener('mouseenter', function () {
+            arrBlock.style.backgroundColor = currentColor;
+        });
+    });
+});
 
 function gridCreate(num) {
     gridContainer.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
@@ -35,6 +43,7 @@ function gridCreate(num) {
         gridContainer.appendChild(myDivs);
     }
 }
+
 gridCreate(defaultGrid);
 gridSlider.oninput = function (e) {
     let sliderText = e.target.value;
@@ -54,30 +63,33 @@ function rainbowButton(e) {
     });
 }
 
-function blackButton() {
+function blackButton(e) {
     const blocks = document.getElementsByClassName('block');
     const arrBlocks = [].slice.call(blocks);
     arrBlocks.forEach((arrBlock) => {
         arrBlock.addEventListener('mouseenter', function () {
+            console.log(e.target.value);
             arrBlock.style.backgroundColor = 'black';
         });
     });
 }
-function grayButton() {
+function grayButton(e) {
     const blocks = document.getElementsByClassName('block');
     const arrBlocks = [].slice.call(blocks);
     arrBlocks.forEach((arrBlock) => {
         arrBlock.addEventListener('mouseenter', function () {
+            console.log(e.target.value);
             arrBlock.style.backgroundColor = '#808080';
         });
     });
 }
 
-function eraserButton() {
+function eraserButton(e) {
     const blocks = document.getElementsByClassName('block');
     const arrBlocks = [].slice.call(blocks);
     arrBlocks.forEach((arrBlock) => {
         arrBlock.addEventListener('mouseenter', function () {
+            console.log(e.target.value);
             arrBlock.style.backgroundColor = 'white';
         });
     });

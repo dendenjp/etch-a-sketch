@@ -11,6 +11,7 @@ html {
     /* Percentage of user's browser font-size setting */
     font-family: 'DynaPuff', cursive;
     font-size: 62.5%;
+    height: 100%;
 
     /* Does NOT work on Safari */
     /* scroll-behavior: smooth; */
@@ -19,10 +20,10 @@ html {
 body {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
 
-    gap: 2rem;
+    height: 100vh;
 }
 
 .page-header {
@@ -65,11 +66,19 @@ body {
     background-color: yellow;
     border: solid 1px black;
     border-radius: 5px;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    gap: 1rem;
 }
 
 .block {
     display: inline-block;
     background-color: white;
+}
+
+.page-footer {
 }
